@@ -1,0 +1,49 @@
+{#{% extends "base.html" %}#}
+{#{% block content %}#}
+{#  <h1>Literary Format List<a style="float: right" href="{% url 'catalog:literary-format-create' %}"> + Create</a></h1>#}
+{#  {% if key_literary_formats_list %}#}
+{#        <ul>#}
+{#          {% for literary_format in key_literary_formats_list %}#}
+{#            <li>{{ literary_format.name }}</li>#}
+{#          {% endfor %}#}
+{#        </ul>#}
+{#  {% else %}#}
+{#        <p>There are no Literary formats in Library</p>#}
+{#  {% endif %}#}
+{#{% endblock %}#}
+
+
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Literary Format List<a class="btn btn-secondary" style="float: right" href="{% url 'catalog:literary-format-create' %}">+</a></h1>
+
+  {% if key_literary_formats_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for literary_format in key_literary_formats_list %}
+        <tr>
+          <td>
+            {{ literary_format.id }}
+          </td>
+          <td>
+            {{ literary_format.name }}
+          </td>
+          <td>
+            <a href="{% url 'catalog:literary-format-update' pk=literary_format.id %}">UPDATE</a>
+          </td>
+          <td>
+            <a href="{% url 'catalog:literary-format-delete' pk=literary_format.id %}">DELETE</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There are no Literary formats in Library</p>
+  {% endif %}
+{% endblock %}

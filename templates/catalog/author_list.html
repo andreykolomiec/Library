@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Author List<a class="btn btn-secondary" style="float: right" href="{% url 'catalog:author-create' %}">+</a></h1>
+  <ul>
+    {% if author_list %}
+      {% for author in author_list %}
+        <li>
+          <a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }} ({{ author.pseudonym }}, {{ author.username }})</a>
+        </li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+{% endblock %}

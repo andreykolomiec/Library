@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{#Скрипт для кастомної ф-ції book_detail_view (function base view)#}
+{#т.я. в context = {"key_book": book,}#}
+
+{#{% block content %}#}
+{#  <h1>Title: {{ key_book.title }}</h1>#}
+{#  <p><strong>Price: </strong>{{ key_book.price }}</p>#}
+{#  <p><strong>Format: </strong>{{ key_book.format }}</p>#}
+{#  <div class="ml-3">#}
+{#    <h3>Authors:</h3>#}
+{#    {% for author in key_book.authors.all %}#}
+{#      <hr>#}
+{#      <p class="text-muted">{{ author.id }}</p>#}
+{#      <p>{{ author.first_name }} {{ author.last_name }}#}
+{#        {% if author.pseudonym %}#}
+{#          {{ author.pseudonym }}#}
+{#        {% endif %}#}
+{#      </p>#}
+{#    {% empty %}#}
+{#      <p>No authors!</p>#}
+{#    {% endfor %}#}
+{#  </div>#}
+{##}
+{#{% endblock %}#}
+
+
+{#Скрипт для class BookDetailView, тому що Gjango в context бачить "book" замівть "key_book"#}
+
+{% block content %}
+  <h1>Title: {{ book.title }}<a class="btn btn-secondary" style="float: right" href="{% url 'catalog:book-update' pk=book.id %}">Edit</a></h1>
+  <p><strong>Price: </strong>{{ book.price }}</p>
+  <p><strong>Format: </strong>{{ book.format }}</p>
+  <div class="ml-3">
+    <h3>Authors:</h3>
+    {% for author in book.authors.all %}
+      <hr>
+      <p class="text-muted">{{ author.id }}</p>
+      <p>{{ author.first_name }} {{ author.last_name }}
+        {% if author.pseudonym %}
+          {{ author.pseudonym }}
+        {% endif %}
+      </p>
+    {% empty %}
+      <p>No authors!</p>
+    {% endfor %}
+  </div>
+
+{% endblock %}
